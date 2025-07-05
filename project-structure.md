@@ -1,6 +1,6 @@
 # Project Structure
 
-Generated on: 7/5/2025, 6:44:22 AM
+Generated on: 7/6/2025, 4:04:04 AM
 Root: e:\car_rental_booking_system_ethnus_mern_stack_project
 
 ```
@@ -27,6 +27,7 @@ Root: e:\car_rental_booking_system_ethnus_mern_stack_project
 │   │   │   ├── cautionIconColored.svg
 │   │   │   ├── check_icon.svg
 │   │   │   ├── close_icon.svg
+│   │   │   ├── customAvatar.png
 │   │   │   ├── dashboardIcon.svg
 │   │   │   ├── dashboardIconColored.svg
 │   │   │   ├── delete_icon.svg
@@ -36,6 +37,7 @@ Root: e:\car_rental_booking_system_ethnus_mern_stack_project
 │   │   │   ├── favicon.svg
 │   │   │   ├── filter_icon.svg
 │   │   │   ├── fuel_icon.svg
+│   │   │   ├── hamburgericon.png
 │   │   │   ├── listIcon.svg
 │   │   │   ├── listIconColored.svg
 │   │   │   ├── location_icon_colored.svg
@@ -63,6 +65,7 @@ Root: e:\car_rental_booking_system_ethnus_mern_stack_project
 │   │   │   │   └── Title.jsx
 │   │   │   ├── Banner.jsx
 │   │   │   ├── CarCard.jsx
+│   │   │   ├── ErrorBoundary.jsx
 │   │   │   ├── FeaturedSection.jsx
 │   │   │   ├── Footer.jsx
 │   │   │   ├── Hero.jsx
@@ -70,6 +73,7 @@ Root: e:\car_rental_booking_system_ethnus_mern_stack_project
 │   │   │   ├── Login.jsx
 │   │   │   ├── Navbar.jsx
 │   │   │   ├── Newsletter.jsx
+│   │   │   ├── Sidebar.jsx
 │   │   │   ├── Silk.jsx
 │   │   │   ├── Testimonial.jsx
 │   │   │   └── Title.jsx
@@ -118,7 +122,10 @@ Root: e:\car_rental_booking_system_ethnus_mern_stack_project
 │   │   └── userRoutes.js
 │   ├── package-lock.json
 │   ├── package.json
+│   ├── seed.js
 │   ├── server.js
 │   └── vercel.json
-└── .gitignore
+├── .gitignore
+├── package-lock.json
+└── package.json
 ```
