@@ -1,12 +1,13 @@
 # Project Structure
 
-Generated on: 7/5/2025, 1:18:08 AM
+Generated on: 7/5/2025, 6:44:22 AM
 Root: e:\car_rental_booking_system_ethnus_mern_stack_project
 
 ```
 ├── client/
 │   ├── public/
 │   │   ├── favicon.svg
+│   │   ├── logo.png
 │   │   └── vite.svg
 │   ├── src/
 │   │   ├── assets/
@@ -39,14 +40,18 @@ Root: e:\car_rental_booking_system_ethnus_mern_stack_project
 │   │   │   ├── listIconColored.svg
 │   │   │   ├── location_icon_colored.svg
 │   │   │   ├── location_icon.svg
+│   │   │   ├── logo.png
 │   │   │   ├── logo.svg
 │   │   │   ├── main_car.png
 │   │   │   ├── menu_icon.svg
 │   │   │   ├── react.svg
 │   │   │   ├── search_icon.svg
 │   │   │   ├── star_icon.svg
+│   │   │   ├── steeringWheelImage.png
 │   │   │   ├── testimonial_image_1.png
 │   │   │   ├── testimonial_image_2.png
+│   │   │   ├── testimonial_image_3.png
+│   │   │   ├── testimonial_image_4.png
 │   │   │   ├── tick_icon.svg
 │   │   │   ├── upload_icon.svg
 │   │   │   ├── user_profile.png
@@ -65,6 +70,7 @@ Root: e:\car_rental_booking_system_ethnus_mern_stack_project
 │   │   │   ├── Login.jsx
 │   │   │   ├── Navbar.jsx
 │   │   │   ├── Newsletter.jsx
+│   │   │   ├── Silk.jsx
 │   │   │   ├── Testimonial.jsx
 │   │   │   └── Title.jsx
 │   │   ├── context/
@@ -83,12 +89,12 @@ Root: e:\car_rental_booking_system_ethnus_mern_stack_project
 │   │   ├── App.jsx
 │   │   ├── index.css
 │   │   └── main.jsx
-│   ├── .gitignore
 │   ├── eslint.config.js
 │   ├── index.html
 │   ├── package-lock.json
 │   ├── package.json
 │   ├── README.md
+│   ├── tailwind.config.js
 │   ├── vercel.json
 │   └── vite.config.js
 ├── server/
@@ -114,6 +120,5 @@ Root: e:\car_rental_booking_system_ethnus_mern_stack_project
 │   ├── package.json
 │   ├── server.js
 │   └── vercel.json
-├── .gitignore
-└── How to Run this Project.pdf
+└── .gitignore
 ```
