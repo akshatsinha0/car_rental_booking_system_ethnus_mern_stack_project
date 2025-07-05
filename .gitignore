@@ -1,0 +1,79 @@
+# Node modules
+node_modules/
+client/node_modules/
+server/node_modules/
+
+# Build output
+client/dist/
+client/build/
+server/dist/
+server/build/
+
+# Environment variables and secrets
+.env
+.env.*
+client/.env
+server/.env
+
+# Log files
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# IDE and editor folders/files
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Coverage and test output
+coverage/
+client/coverage/
+server/coverage/
+
+# Misc
+*.tgz
+*.gz
+*.zip
+*.bak
+*.tmp
+
+# ImageKit or other cloud keys
+imagekit.js
+server/configs/imageKit.js
+
+# Database
+*.sqlite
+*.db
+
+# Local environment
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Ignore local git repos in subfolders
+client/.git
+server/.git
+
+# Ignore system files
+ehthumbs.db
+Icon?
+
+# Ignore by pattern
+client/.next/
+server/.next/
+
+# Ignore vercel config if not needed
+vercel.json
+client/vercel.json
+server/vercel.json
