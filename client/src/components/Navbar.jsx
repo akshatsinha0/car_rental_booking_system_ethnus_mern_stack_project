@@ -1,97 +1,196 @@
-import React, { useState } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import { assets, menuLinks } from '../assets/assets'
-import {Link, useLocation, useNavigate} from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { useAppContext } from '../context/AppContext'
 import toast from 'react-hot-toast'
-import {motion} from 'motion/react'
+import { motion, AnimatePresence } from 'framer-motion'
 import Sidebar from './Sidebar'
 import hamburgerIcon from '../assets/hamburgericon.png'
+import customAvatar from '../assets/customAvatar.png'
 
 const Navbar = () => {
-    const {setShowLogin, user, logout, isOwner, axios, setIsOwner} = useAppContext()
-    const location = useLocation()
-    const [open, setOpen] = useState(false)
-    const navigate = useNavigate()
-    const [sidebarOpen, setSidebarOpen] = useState(false)
-    const [showClose, setShowClose] = useState(false)
+  const { setShowLogin, user, logout, isOwner, axios, setIsOwner } = useAppContext()
+  const location = useLocation()
+  const navigate = useNavigate()
+  const [sidebarOpen, setSidebarOpen] = useState(false)
+  const [showClose, setShowClose] = useState(false)
+  const [changingRole, setChangingRole] = useState(false)
 
-    const changeRole = async ()=>{
-        try {
-            const { data } = await axios.post('/api/owner/change-role')
-            if (data.success) {
-                setIsOwner(true)
-                toast.success(data.message)
-            }else{
-                toast.error(data.message)
-            }
-        } catch (error) {
-            toast.error(error.message)
-        }
+  const changeRole = async () => {
+    setChangingRole(true)
+    try {
+      const { data } = await axios.post('/api/owner/change-role')
+      data.success ? toast.success(data.message) : toast.error(data.message)
+      if (data.success) setIsOwner(true)
+    } catch (err) {
+      toast.error(err.message)
+    } finally {
+      setChangingRole(false)
     }
+  }
 
-    // Handle hamburger to close animation
-    const handleHamburgerClick = () => {
-        setSidebarOpen(true)
-        setTimeout(() => setShowClose(true), 350) // sync with sidebar animation
-    }
-    const handleSidebarClose = () => {
-        setShowClose(false)
-        setTimeout(() => setSidebarOpen(false), 350) // sync with sidebar animation
-    }
+  const handleHamburgerClick = () => {
+    setSidebarOpen(true)
+    setTimeout(() => setShowClose(true), 350)
+  }
+  const handleSidebarClose = () => {
+    setShowClose(false)
+    setTimeout(() => setSidebarOpen(false), 350)
+  }
 
-    return (
-        <>
-            <motion.div 
-            initial={{y: -20, opacity: 0}}
-            animate={{y: 0, opacity: 1}}
-            transition={{duration: 0.5}}
-            className={`flex items-center justify-between px-6 md:px-16 lg:px-24 xl:px-32 py-4 text-text border-b border-borderColor relative transition-all bg-[#F5DEB3]`}>
+  // Close sidebar on route change
+  useEffect(() => {
+    if (sidebarOpen) handleSidebarClose()
+    // eslint-disable-next-line
+  }, [location.pathname])
 
-                <Link to='/'>
-                    <span className="flex items-center gap-2">
-                        <motion.img whileHover={{scale: 1.05}} src={assets.logo} alt="logo" className="h-8"/>
-                        <span className="text-3xl michroma-regular text-primary font-extrabold select-none" style={{letterSpacing: '1px'}}>
-                          DriveGood
-                        </span>
-                    </span>
-                </Link>
+  return (
+    <>
+      {/* Main Navbar */}
+      <motion.nav
+        initial={{ y: -30, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.6, ease: 'easeOut' }}
+        className="fixed w-full z-40 bg-[#F5DEB3] backdrop-blur-md border-b border-borderColor"
+      >
+        <div className="max-w-7xl mx-auto flex items-center justify-between px-6 md:px-12 lg:px-16 py-4">
+          {/* Logo */}
+          <Link to="/" className="flex items-center gap-2">
+            <motion.img
+              src={assets.logo}
+              alt="logo"
+              className="h-8"
+              whileHover={{ scale: 1.1, rotate: 5 }}
+              transition={{ type: 'spring', stiffness: 300 }}
+            />
+            <motion.span
+              className="text-3xl michroma-regular text-primary font-extrabold select-none"
+              style={{ letterSpacing: '1px' }}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.3 }}
+            >
+              DriveGood
+            </motion.span>
+          </Link>
 
-                {/* Search bar */}
-                <div className="flex-1 flex justify-center">
-                    <input
-                      type="text"
-                      className="py-1.5 w-[420px] max-w-full bg-white/70 outline-none placeholder-gray-500 rounded-full px-6 shadow"
-                      placeholder="Search cars"
-                    />
-                </div>
+          {/* Search */}
+          <motion.div
+            className="flex-1 flex justify-center px-4"
+            initial={{ scale: 0.9, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ delay: 0.4, duration: 0.5 }}
+          >
+            <input
+              type="text"
+              placeholder="Search cars..."
+              className="w-full max-w-lg px-6 py-2 rounded-full bg-white/80 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-primary shadow-md transition"
+            />
+          </motion.div>
 
-                {/* Login/Logout button */}
-                <div className="flex-1 flex justify-end">
-                    <button
-                        onClick={() => { user ? logout() : setShowLogin(true); }}
-                        className="cursor-pointer px-8 py-2 bg-primary hover:bg-primary-dull transition-all text-white rounded-lg"
-                    >
-                        {user ? 'Logout' : 'Login'}
-                    </button>
-                </div>
-            </motion.div>
-
-            {/* Hamburger/Close Button - absolutely positioned, outside flex row */}
-            {!sidebarOpen && (
-              <button
-                className="fixed top-6 right-10 z-[2100] flex items-center justify-center w-12 h-12 bg-white/80 rounded-full shadow-lg hover:scale-105 transition-transform duration-300"
-                onClick={handleHamburgerClick}
-                aria-label="Open menu"
-                style={{ border: 'none', outline: 'none' }}
+          {/* Right Controls */}
+          <div className="flex items-center space-x-4">
+            {user ? (
+              <UserProfileDropdown user={user} logout={logout} changeRole={changeRole} changingRole={changingRole} />
+            ) : (
+              <motion.button
+                onClick={() => setShowLogin(true)}
+                className="px-6 py-2 bg-primary text-white rounded-lg shadow hover:scale-105 transition-transform"
+                whileHover={{ boxShadow: '0 8px 20px rgba(0,0,0,0.2)' }}
               >
-                <img src={hamburgerIcon} alt="Menu" className="w-7 h-7 transition-all duration-300" />
-              </button>
+                Login
+              </motion.button>
             )}
 
-            {/* Sidebar */}
-            <Sidebar open={sidebarOpen} onClose={handleSidebarClose} />
-        </>
-    )
+            {/* Hamburger */}
+            {!sidebarOpen && (
+              <motion.button
+                onClick={handleHamburgerClick}
+                className="relative w-12 h-12 bg-white/80 rounded-full shadow-lg flex items-center justify-center hover:scale-110 transition-transform"
+                whileHover={{ rotate: 90 }}
+                aria-label="Open menu"
+              >
+                <img src={hamburgerIcon} alt="Menu" className="w-7 h-7" />
+              </motion.button>
+            )}
+          </div>
+        </div>
+      </motion.nav>
+
+      {/* Sidebar */}
+      <AnimatePresence>
+        {sidebarOpen && (
+          <Sidebar open={showClose} onClose={handleSidebarClose} />
+        )}
+      </AnimatePresence>
+    </>
+  )
+}
+
+function UserProfileDropdown({ user, logout, changeRole, changingRole }) {
+  const [open, setOpen] = useState(false)
+  const btnRef = useRef(null)
+
+  // Close on outside click
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (!btnRef.current?.contains(e.target)) setOpen(false)
+    }
+    document.addEventListener('mousedown', handleClickOutside)
+    return () => document.removeEventListener('mousedown', handleClickOutside)
+  }, [])
+
+  return (
+    <div className="relative" ref={btnRef}>
+      <motion.img
+        src={customAvatar}
+        alt="Avatar"
+        className="w-11 h-11 rounded-full border-2 border-primary shadow-lg cursor-pointer"
+        onClick={() => setOpen((v) => !v)}
+        whileHover={{ scale: 1.1 }}
+        transition={{ type: 'spring', stiffness: 300 }}
+      />
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            className="absolute right-0 mt-3 w-64 bg-white rounded-2xl shadow-2xl border border-gray-200 z-50 p-5 flex flex-col gap-3"
+            initial={{ y: -10, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            exit={{ y: -10, opacity: 0 }}
+            transition={{ duration: 0.3 }}
+          >
+            <div className="flex items-center gap-3 mb-2">
+              <img src={customAvatar} alt="Avatar" className="w-12 h-12 rounded-full border border-primary" />
+              <div>
+                <div className="font-bold text-lg michroma-regular">{user.name}</div>
+                <div className="text-gray-500 text-sm truncate">{user.email}</div>
+              </div>
+            </div>
+            <div className="text-gray-700 text-sm">
+              Role: <span className="font-semibold">{user.role}</span>
+            </div>
+            <motion.button
+              onClick={changeRole}
+              disabled={changingRole}
+              className="w-full py-2 bg-primary text-white rounded-lg font-semibold hover:bg-primary-dull transition"
+              whileHover={{ scale: 1.02 }}
+              transition={{ duration: 0.2 }}
+            >
+              {changingRole ? 'Switching…' : 'Become Owner'}
+            </motion.button>
+            <motion.button
+              onClick={logout}
+              className="w-full py-2 bg-red-500 text-white rounded-lg font-semibold hover:bg-red-600 transition"
+              whileHover={{ scale: 1.02 }}
+              transition={{ duration: 0.2 }}
+            >
+              Logout
+            </motion.button>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  )
 }
 
 export default Navbar

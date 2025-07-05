@@ -15,6 +15,7 @@ import Login from './components/Login'
 import { Toaster } from 'react-hot-toast'
 import { useAppContext } from './context/AppContext'
 import Loader from './components/Loader'
+import ErrorBoundary from './components/ErrorBoundary'
 
 const App = () => {
 
