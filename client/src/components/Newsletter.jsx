@@ -16,7 +16,7 @@ const Newsletter = () => {
              whileInView={{ opacity: 1, y: 0 }}
              transition={{ delay: 0.2, duration: 0.5 }}
 
-            className="md:text-4xl text-2xl font-semibold">Never Miss a Deal!</motion.h1>
+            className="md:text-4xl text-2xl font-semibold">Stay Ahead of the Deals!</motion.h1>
 
             <motion.p 
             initial={{ opacity: 0, y: 20 }}
@@ -24,7 +24,7 @@ const Newsletter = () => {
             transition={{ delay: 0.3, duration: 0.5 }}
 
             className="md:text-lg text-gray-500/70 pb-8">
-                Subscribe to get the latest offers, new arrivals, and exclusive discounts
+                Sign up to receive the newest offers, fresh arrivals, and members-only discounts.
             </motion.p>
             <motion.form 
                 initial={{ opacity: 0, y: 20 }}

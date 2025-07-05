@@ -162,8 +162,18 @@ function UserProfileDropdown({ user, logout, changeRole, changingRole }) {
             <div className="flex items-center gap-3 mb-2">
               <img src={customAvatar} alt="Avatar" className="w-12 h-12 rounded-full border border-primary" />
               <div>
-                <div className="font-bold text-lg michroma-regular">{user.name}</div>
-                <div className="text-gray-500 text-sm truncate">{user.email}</div>
+                <div
+                  className="font-bold text-lg michroma-regular max-w-[180px] overflow-hidden text-ellipsis whitespace-nowrap"
+                  title={user.name}
+                >
+                  {user.name}
+                </div>
+                <div
+                  className="text-gray-500 text-sm max-w-[180px] overflow-hidden text-ellipsis whitespace-nowrap"
+                  title={user.email}
+                >
+                  {user.email}
+                </div>
               </div>
             </div>
             <div className="text-gray-700 text-sm">

@@ -282,7 +282,7 @@ const TestimonialCard = ({ testimonial, isActive, stackPosition }) => {
     return configs[stackPosition] || configs[2];
   }, [stackPosition]);
 
-  // Use useSpring for y and scale if active
+  
   const springY = useSpring(stackProps.y, { stiffness: 120, damping: 18, mass: 0.7 });
   const springScale = useSpring(stackProps.scale, { stiffness: 120, damping: 18, mass: 0.7 });
 
@@ -717,7 +717,7 @@ const Testimonial = () => {
         animate={isInView ? { scale: 1, opacity: 1 } : { scale: 0.8, opacity: 0 }}
         transition={{ duration: 0.8, delay: 0.4 }}
       >
-        <AnimatePresence mode="wait">
+        <AnimatePresence>
           {testimonials.map((testimonial, index) => {
             const stackPosition = index - activeIndex;
             if (stackPosition < 0 || stackPosition > 2) return null;
