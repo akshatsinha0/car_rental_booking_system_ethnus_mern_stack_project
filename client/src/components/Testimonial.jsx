@@ -35,7 +35,7 @@ import { assets } from '../assets/assets';
     role: 'Tech & Design',
     company: 'Startup',
           image: assets.testimonial_image_2, 
-    testimonial: 'DriveGood made my entrepreneurial journey smoother than ever. Their door-to-door service and customer-first approach created unforgettable experiences that fuel my passion for innovation.',
+    testimonial: 'DriveGood made my idea to start an entrepreneurial journey smoother than ever. The thought of - Their door-to-door service and customer-first approach created unforgettable experiences that fuel my passion for innovation.',
     rating: 5,
     journey: "From startup struggles to scaling success",
     metric: "200+ team rides organized",

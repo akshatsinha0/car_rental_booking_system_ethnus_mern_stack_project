@@ -43,7 +43,7 @@ const Hero = () => {
 
   return (
     <motion.section
-      className="h-screen flex flex-col items-center justify-center bg-[#F5DEB3] text-center px-6"
+      className="h-screen flex flex-col items-center justify-center bg-[#F5DEB3] text-center px-6 pt-32 md:pt-40"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.8 }}
