@@ -48,8 +48,8 @@ server/coverage/
 *.tmp
 
 # ImageKit or other cloud keys
-imagekit.js
-server/configs/imageKit.js
+# imagekit.js
+# server/configs/imageKit.js
 
 # Database
 *.sqlite
