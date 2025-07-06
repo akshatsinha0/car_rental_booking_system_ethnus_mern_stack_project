@@ -90,6 +90,14 @@ const MyBookings = () => {
                 <h1 className='text-2xl font-semibold text-primary'>{currency}{booking.price}</h1>
                 <p>Booked on {booking.createdAt.split('T')[0]}</p>
               </div>
+              {booking.status === 'pending' && (
+                <button
+                  className='mt-4 px-4 py-2 bg-primary text-white rounded hover:bg-primary-dark transition-colors duration-200'
+                  onClick={() => toast('Pre-pay clicked! (Razorpay integration coming soon)')}
+                >
+                  Pre-pay
+                </button>
+              )}
            </div>
 
 
