@@ -5,6 +5,19 @@ import { useAppContext } from '../context/AppContext'
 import toast from 'react-hot-toast'
 import { motion } from 'motion/react'
 
+// Razorpay script loader utility
+function loadRazorpayScript(src) {
+  return new Promise((resolve) => {
+    const script = document.createElement('script');
+    script.src = src;
+    script.onload = () => resolve(true);
+    script.onerror = () => resolve(false);
+    document.body.appendChild(script);
+  });
+}
+
+const RAZORPAY_KEY_ID = 'rzp_test_iSvrQqTNwRSpYm';
+
 const MyBookings = () => {
 
   const { axios, user, currency } = useAppContext()
@@ -87,13 +100,42 @@ const MyBookings = () => {
            <div className='md:col-span-1 flex flex-col justify-between gap-6'>
               <div className='text-sm text-gray-500 text-right'>
                 <p>Total Price</p>
-                <h1 className='text-2xl font-semibold text-primary'>{currency}{booking.price}</h1>
+                <h1 className='text-2xl font-semibold text-primary'>{'Rs.'}{booking.price}</h1>
                 <p>Booked on {booking.createdAt.split('T')[0]}</p>
               </div>
               {booking.status === 'pending' && (
                 <button
                   className='mt-4 px-4 py-2 bg-primary text-white rounded hover:bg-primary-dark transition-colors duration-200'
-                  onClick={() => toast('Pre-pay clicked! (Razorpay integration coming soon)')}
+                  onClick={async () => {
+                    const res = await loadRazorpayScript('https://checkout.razorpay.com/v1/checkout.js');
+                    if (!res) {
+                      toast.error('Razorpay SDK failed to load.');
+                      return;
+                    }
+                    const options = {
+                      key: RAZORPAY_KEY_ID,
+                      amount: booking.price * 100, // in paise
+                      currency: 'INR',
+                      name: 'Car Rental Booking',
+                      description: `Booking for ${booking.car.brand} ${booking.car.model}`,
+                      image: booking.car.image,
+                      handler: function (response) {
+                        toast.success('Payment simulated! (No backend verification)');
+                      },
+                      prefill: {
+                        name: user?.name || '',
+                        email: user?.email || '',
+                      },
+                      notes: {
+                        booking_id: booking._id,
+                      },
+                      theme: {
+                        color: '#1e40af',
+                      },
+                    };
+                    const rzp = new window.Razorpay(options);
+                    rzp.open();
+                  }}
                 >
                   Pre-pay
                 </button>
