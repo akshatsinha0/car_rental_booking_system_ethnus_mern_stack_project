@@ -51,20 +51,20 @@ const Navbar = () => {
         initial={{ y: -30, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.6, ease: 'easeOut' }}
-        className="fixed w-full z-40 bg-[#F5DEB3] backdrop-blur-md border-b border-borderColor"
+        className="fixed w-full z-50 bg-[#F5DEB3] backdrop-blur-md border-b border-borderColor"
       >
-        <div className="max-w-7xl mx-auto flex items-center justify-between px-6 md:px-12 lg:px-16 py-4">
+        <div className="max-w-7xl mx-auto flex items-center justify-between px-3 sm:px-6 md:px-12 lg:px-16 py-3 md:py-4">
           {/* Logo */}
-          <Link to="/" className="flex items-center gap-2">
+          <Link to="/" className="flex items-center gap-2 min-w-0">
             <motion.img
               src={assets.logo}
               alt="logo"
-              className="h-8"
+              className="h-8 w-8 min-w-[2rem]"
               whileHover={{ scale: 1.1, rotate: 5 }}
               transition={{ type: 'spring', stiffness: 300 }}
             />
             <motion.span
-              className="text-3xl michroma-regular text-primary font-extrabold select-none"
+              className="text-xl xs:text-2xl sm:text-3xl michroma-regular text-primary font-extrabold select-none truncate"
               style={{ letterSpacing: '1px' }}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -76,7 +76,7 @@ const Navbar = () => {
 
           {/* Search */}
           <motion.div
-            className="flex-1 flex justify-center px-4"
+            className="hidden md:flex flex-1 justify-center px-4"
             initial={{ scale: 0.9, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             transition={{ delay: 0.4, duration: 0.5 }}
@@ -89,13 +89,13 @@ const Navbar = () => {
           </motion.div>
 
           {/* Right Controls */}
-          <div className="flex items-center space-x-4">
+          <div className="flex items-center gap-2 sm:gap-4">
             {user ? (
               <UserProfileDropdown user={user} logout={logout} changeRole={changeRole} changingRole={changingRole} />
             ) : (
               <motion.button
                 onClick={() => setShowLogin(true)}
-                className="px-6 py-2 bg-primary text-white rounded-lg shadow hover:scale-105 transition-transform"
+                className="px-4 py-2 text-sm md:text-base bg-primary text-white rounded-lg shadow hover:scale-105 transition-transform"
                 whileHover={{ boxShadow: '0 8px 20px rgba(0,0,0,0.2)' }}
               >
                 Login
@@ -106,11 +106,11 @@ const Navbar = () => {
             {!sidebarOpen && (
               <motion.button
                 onClick={handleHamburgerClick}
-                className="relative w-12 h-12 bg-white/80 rounded-full shadow-lg flex items-center justify-center hover:scale-110 transition-transform"
+                className="relative w-10 h-10 bg-white/80 rounded-full shadow-lg flex items-center justify-center hover:scale-110 transition-transform md:hidden"
                 whileHover={{ rotate: 90 }}
                 aria-label="Open menu"
               >
-                <img src={hamburgerIcon} alt="Menu" className="w-7 h-7" />
+                <img src={hamburgerIcon} alt="Menu" className="w-6 h-6" />
               </motion.button>
             )}
           </div>
