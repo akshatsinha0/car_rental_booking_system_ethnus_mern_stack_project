@@ -155,7 +155,7 @@ const Login = () => {
             <motion.img
               src={showPassword ? assets.eye_close_icon : assets.eye_icon}
               alt="toggle visibility"
-              className="absolute right-3 top-1/2 -translate-y-1/2 w-6 h-6 cursor-pointer"
+              className="absolute right-3 top-1/2 -translate-y-1/2 w-8 h-8 cursor-pointer"
               onClick={() => setShowPassword((v) => !v)}
               whileTap={{ scale: 0.8 }}
               initial={{ opacity: 0.5 }}
