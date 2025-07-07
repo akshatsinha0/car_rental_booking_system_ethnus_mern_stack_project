@@ -9,14 +9,14 @@ const CarCard = ({car}) => {
 
   return (
     <div className="relative flex items-center justify-center group">
-      {/* Glow effect wrapper, only visible on hover */}
+  
       <div className="pointer-events-none absolute inset-0 z-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl" 
         style={{
           background: 'radial-gradient(circle at 50% 50%, #9D50FF 0%, #00CFFF 40%, #FF61C7 70%, #FFD700 100%)',
           filter: 'blur(32px)',
         }}
       />
-      {/* Card content */}
+  
       <div onClick={()=> {navigate(`/car-details/${car._id}`); scrollTo(0,0)}} 
         className='relative rounded-xl overflow-hidden shadow-lg hover:-translate-y-1 transition-all duration-500 cursor-pointer bg-white z-10'>
         <div className='relative h-48 overflow-hidden'> 

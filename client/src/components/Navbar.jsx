@@ -106,7 +106,7 @@ const Navbar = () => {
             {!sidebarOpen && (
               <motion.button
                 onClick={handleHamburgerClick}
-                className="relative w-10 h-10 bg-white/80 rounded-full shadow-lg flex items-center justify-center hover:scale-110 transition-transform md:hidden"
+                className="relative w-10 h-10 bg-white/80 rounded-full shadow-lg flex items-center justify-center hover:scale-110 transition-transform"
                 whileHover={{ rotate: 90 }}
                 aria-label="Open menu"
               >
