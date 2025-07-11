@@ -16,6 +16,7 @@ import { Toaster } from 'react-hot-toast'
 import { useAppContext } from './context/AppContext'
 import Loader from './components/Loader'
 import ErrorBoundary from './components/ErrorBoundary'
+import CreatorsBanner from './components/CreatorsBanner'
 
 const App = () => {
 
@@ -52,6 +53,8 @@ const App = () => {
         </Route>
       </Routes>
 
+      {/* Show CreatorsBanner only for non-owner paths */}
+      {!isOwnerPath && <CreatorsBanner />}
       {!isOwnerPath && <Footer />}
     </div>
   )
