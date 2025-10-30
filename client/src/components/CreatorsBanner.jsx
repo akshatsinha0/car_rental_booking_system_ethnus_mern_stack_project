@@ -44,6 +44,8 @@ const CreatorsBanner = () => {
   const containerRef = useRef(null);
   const marqueeRef = useRef(null);
   const animationRef = useRef(null);
+  const lastTimeRef = useRef(null);
+  const positionRef = useRef(0);
   const [isPaused, setIsPaused] = useState(false);
   const [containerWidth, setContainerWidth] = useState(0);
   const [marqueeWidth, setMarqueeWidth] = useState(0);
@@ -79,27 +81,40 @@ const CreatorsBanner = () => {
   }, [measureDimensions]);
 
 
+  // Smooth, delta-time based marquee that resumes from the last position
   useEffect(() => {
     if (!containerWidth || !marqueeWidth || isPaused) return;
-    let startTime = null;
-    let position = containerWidth; // start at right
-    const totalDistance = marqueeWidth + containerWidth;
-    const cycleDuration = (totalDistance / ANIMATION_CONFIG.speed) * 1000; // ms
-    const animate = (currentTime) => {
-      if (!startTime) startTime = currentTime;
-      const elapsed = currentTime - startTime;
-      const progress = (elapsed % cycleDuration) / cycleDuration;
-      position = containerWidth - (progress * totalDistance);
+
+    // initialize position on first run or when dimensions change
+    if (positionRef.current === 0 && !marqueeRef.current?.style.transform) {
+      positionRef.current = containerWidth; // start at right edge
+    }
+
+    const step = (time) => {
+      if (lastTimeRef.current == null) lastTimeRef.current = time;
+      const delta = time - lastTimeRef.current; // ms
+      lastTimeRef.current = time;
+
+      // move left by speed px/sec
+      positionRef.current -= (ANIMATION_CONFIG.speed * delta) / 1000;
+
+      // when the whole strip has left the view, reset to the right edge
+      if (positionRef.current <= -marqueeWidth) {
+        positionRef.current = containerWidth;
+      }
+
       if (marqueeRef.current) {
-        marqueeRef.current.style.transform = `translateX(${position}px)`;
+        marqueeRef.current.style.transform = `translateX(${positionRef.current}px)`;
       }
-      animationRef.current = requestAnimationFrame(animate);
+
+      animationRef.current = requestAnimationFrame(step);
     };
-    animationRef.current = requestAnimationFrame(animate);
+
+    animationRef.current = requestAnimationFrame(step);
     return () => {
-      if (animationRef.current) {
-        cancelAnimationFrame(animationRef.current);
-      }
+      if (animationRef.current) cancelAnimationFrame(animationRef.current);
+      animationRef.current = null;
+      lastTimeRef.current = null; // so resume has fresh delta
     };
   }, [containerWidth, marqueeWidth, isPaused, ANIMATION_CONFIG.speed]);
 
