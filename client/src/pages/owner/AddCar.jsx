@@ -6,7 +6,7 @@ import toast from 'react-hot-toast'
 
 const AddCar = () => {
 
-  const {axios, currency} = useAppContext()
+  const {axios} = useAppContext()
 
   const [image, setImage] = useState(null)
   const [car, setCar] = useState({

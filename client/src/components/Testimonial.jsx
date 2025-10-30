@@ -100,7 +100,7 @@ import { assets } from '../assets/assets';
 ];
 
 
-const ParticleSystem = ({ type, colors, count, isActive }) => {
+const ParticleSystem = ({ type, count, isActive }) => {
   const canvasRef = useRef(null);
   const animationRef = useRef(null);
   const particlesRef = useRef([]);
@@ -137,12 +137,13 @@ const ParticleSystem = ({ type, colors, count, isActive }) => {
           particle.y += Math.sin(Date.now() * 0.001 + index) * 0.5;
           particle.x += Math.cos(Date.now() * 0.001 + index) * 0.3;
           break;
-        case 'swirling':
+        case 'swirling': {
           const centerX = 260, centerY = 160;
           const angle = Math.atan2(particle.y - centerY, particle.x - centerX);
           particle.x += Math.cos(angle + 0.02) * 0.8;
           particle.y += Math.sin(angle + 0.02) * 0.8;
           break;
+        }
         case 'data-flow':
           particle.x += particle.vx;
           particle.y += particle.vy;

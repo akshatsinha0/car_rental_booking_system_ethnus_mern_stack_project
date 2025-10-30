@@ -1,7 +1,8 @@
 # Project Structure
 
-Generated on: 7/7/2025, 1:13:45 AM
+Generated on: 8/8/2025, 8:26:22 PM
 Root: e:\car_rental_booking_system_ethnus_mern_stack_project
+Excluded folders: .git, .vscode, client/node_modules, node_modules, server/node_modules
 
 ```
 ├── client/
@@ -34,10 +35,13 @@ Root: e:\car_rental_booking_system_ethnus_mern_stack_project
 │   │   │   ├── edit_icon.svg
 │   │   │   ├── eye_close_icon.svg
 │   │   │   ├── eye_icon.svg
+│   │   │   ├── facebook_logo.svg
 │   │   │   ├── favicon.svg
 │   │   │   ├── filter_icon.svg
 │   │   │   ├── fuel_icon.svg
+│   │   │   ├── gmail_logo.svg
 │   │   │   ├── hamburgericon.png
+│   │   │   ├── instagram_logo.svg
 │   │   │   ├── listIcon.svg
 │   │   │   ├── listIconColored.svg
 │   │   │   ├── location_icon_colored.svg
@@ -55,6 +59,7 @@ Root: e:\car_rental_booking_system_ethnus_mern_stack_project
 │   │   │   ├── testimonial_image_3.png
 │   │   │   ├── testimonial_image_4.png
 │   │   │   ├── tick_icon.svg
+│   │   │   ├── twitter_logo.svg
 │   │   │   ├── upload_icon.svg
 │   │   │   ├── user_profile.png
 │   │   │   └── users_icon.svg
@@ -65,6 +70,7 @@ Root: e:\car_rental_booking_system_ethnus_mern_stack_project
 │   │   │   │   └── Title.jsx
 │   │   │   ├── Banner.jsx
 │   │   │   ├── CarCard.jsx
+│   │   │   ├── CreatorsBanner.jsx
 │   │   │   ├── ErrorBoundary.jsx
 │   │   │   ├── FeaturedSection.jsx
 │   │   │   ├── Footer.jsx
@@ -120,12 +126,16 @@ Root: e:\car_rental_booking_system_ethnus_mern_stack_project
 │   │   ├── bookingRoutes.js
 │   │   ├── ownerRoutes.js
 │   │   └── userRoutes.js
+│   ├── Dockerfile
+│   ├── Dockerrun.aws.json
 │   ├── package-lock.json
 │   ├── package.json
 │   ├── seed.js
 │   ├── server.js
 │   └── vercel.json
 ├── .gitignore
+├── backend-docker.zip
 ├── package-lock.json
-└── package.json
+├── package.json
+└── server.zip
 ```

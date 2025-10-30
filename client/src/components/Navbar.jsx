@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react'
-import { assets, menuLinks } from '../assets/assets'
-import { Link, useLocation, useNavigate } from 'react-router-dom'
+import { assets } from '../assets/assets'
+import { Link, useLocation } from 'react-router-dom'
 import { useAppContext } from '../context/AppContext'
 import toast from 'react-hot-toast'
 import { motion, AnimatePresence } from 'framer-motion'
@@ -9,9 +9,8 @@ import hamburgerIcon from '../assets/hamburgericon.png'
 import customAvatar from '../assets/customAvatar.png'
 
 const Navbar = () => {
-  const { setShowLogin, user, logout, isOwner, axios, setIsOwner } = useAppContext()
+  const { setShowLogin, user, logout, axios, setIsOwner } = useAppContext()
   const location = useLocation()
-  const navigate = useNavigate()
   const [sidebarOpen, setSidebarOpen] = useState(false)
   const [showClose, setShowClose] = useState(false)
   const [changingRole, setChangingRole] = useState(false)

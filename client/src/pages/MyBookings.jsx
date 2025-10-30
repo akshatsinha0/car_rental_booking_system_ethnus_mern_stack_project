@@ -20,7 +20,7 @@ const RAZORPAY_KEY_ID = 'rzp_test_iSvrQqTNwRSpYm';
 
 const MyBookings = () => {
 
-  const { axios, user, currency } = useAppContext()
+  const { axios, user } = useAppContext()
 
   const [bookings, setBookings] = useState([])
 
@@ -119,7 +119,7 @@ const MyBookings = () => {
                       name: 'Car Rental Booking',
                       description: `Booking for ${booking.car.brand} ${booking.car.model}`,
                       image: booking.car.image,
-                      handler: function (response) {
+                      handler: function (_response) {
                         toast.success('Payment simulated! (No backend verification)');
                       },
                       prefill: {

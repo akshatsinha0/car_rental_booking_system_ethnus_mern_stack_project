@@ -5,11 +5,11 @@ class ErrorBoundary extends React.Component {
     super(props);
     this.state = { hasError: false };
   }
-  static getDerivedStateFromError(error) {
+  static getDerivedStateFromError(_error) {
     return { hasError: true };
   }
-  componentDidCatch(error, errorInfo) {
-    // Otherwise it is gonna be good to log error
+  componentDidCatch(_error, _errorInfo) {
+    // Could log the error in production observability here
   }
   render() {
     if (this.state.hasError) {

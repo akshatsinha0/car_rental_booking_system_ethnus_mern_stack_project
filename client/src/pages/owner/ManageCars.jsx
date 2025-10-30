@@ -6,7 +6,7 @@ import toast from 'react-hot-toast'
 
 const ManageCars = () => {
 
-  const {isOwner, axios, currency} = useAppContext()
+  const {isOwner, axios} = useAppContext()
 
   const [cars, setCars] = useState([])
 

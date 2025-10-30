@@ -4,7 +4,6 @@ import { useNavigate } from 'react-router-dom'
 
 const CarCard = ({car}) => {
 
-    const currency = import.meta.env.VITE_CURRENCY
     const navigate = useNavigate()
 
   return (

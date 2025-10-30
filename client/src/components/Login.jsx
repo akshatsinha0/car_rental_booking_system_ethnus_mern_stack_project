@@ -6,7 +6,6 @@ import { motion, AnimatePresence } from 'framer-motion'
 
 const Login = () => {
   const { setShowLogin, axios, setToken, navigate } = useAppContext()
-  const backdropRef = useRef(null)
   const formRef = useRef(null)
 
   const [state, setState] = useState('login')
