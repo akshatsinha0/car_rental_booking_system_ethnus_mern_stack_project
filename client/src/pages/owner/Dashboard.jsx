@@ -24,7 +24,7 @@ const Dashboard = () => {
     {title: "Confirmed", value: data.completedBookings, icon: assets.listIconColored},
   ]
 
-  const fetchDashboardData = async ()=>{
+  const fetchDashboardData = React.useCallback(async ()=>{
     try {
        const { data } = await axios.get('/api/owner/dashboard')
        if (data.success){
@@ -35,13 +35,13 @@ const Dashboard = () => {
     } catch (error) {
       toast.error(error.message)
     }
-  }
+  },[axios])
 
   useEffect(()=>{
     if(isOwner){
       fetchDashboardData()
     }
-  },[isOwner])
+  },[isOwner, fetchDashboardData])
 
   return (
     <div className='px-4 pt-10 md:px-10 flex-1'>

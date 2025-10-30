@@ -10,7 +10,7 @@ const ManageCars = () => {
 
   const [cars, setCars] = useState([])
 
-  const fetchOwnerCars = async ()=>{
+  const fetchOwnerCars = React.useCallback(async ()=>{
     try {
       const {data} = await axios.get('/api/owner/cars')
       if(data.success){
@@ -21,7 +21,7 @@ const ManageCars = () => {
     } catch (error) {
       toast.error(error.message)
     }
-  }
+  },[axios])
 
   const toggleAvailability = async (carId)=>{
     try {
@@ -58,7 +58,7 @@ const ManageCars = () => {
 
   useEffect(()=>{
     isOwner && fetchOwnerCars()
-  },[isOwner])
+  },[isOwner, fetchOwnerCars])
 
   return (
     <div className='px-4 pt-10 md:px-10 w-full'>

@@ -24,7 +24,7 @@ const MyBookings = () => {
 
   const [bookings, setBookings] = useState([])
 
-  const fetchMyBookings = async ()=>{
+  const fetchMyBookings = React.useCallback(async ()=>{
     try {
       const { data } = await axios.get('/api/bookings/user')
       if (data.success){
@@ -35,11 +35,11 @@ const MyBookings = () => {
     } catch (error) {
       toast.error(error.message)
     }
-  }
+  },[axios])
 
   useEffect(()=>{
     user && fetchMyBookings()
-  },[user])
+  },[user, fetchMyBookings])
 
   return (
     <motion.div 

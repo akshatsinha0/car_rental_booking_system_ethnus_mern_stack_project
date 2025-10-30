@@ -39,8 +39,8 @@ export default [
           argsIgnorePattern: '^_',
         },
       ],
-      'react-refresh/only-export-components': [
-        'warn',
+'react-refresh/only-export-components': [
+        'off',
         { allowConstantExport: true },
       ],
     },

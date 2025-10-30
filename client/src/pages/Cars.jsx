@@ -22,7 +22,7 @@ const Cars = () => {
   const isSearchData = pickupLocation && pickupDate && returnDate
   const [filteredCars, setFilteredCars] = useState([])
 
-  const applyFilter = async ()=>{
+  const applyFilter = React.useCallback(async ()=>{
      
     if(input === ''){
       setFilteredCars(cars)
@@ -36,9 +36,9 @@ const Cars = () => {
       || car.transmission.toLowerCase().includes(input.toLowerCase())
     })
     setFilteredCars(filtered)
-  }
+  },[cars, input])
 
-  const searchCarAvailablity = async () =>{
+  const searchCarAvailablity = React.useCallback(async () =>{
     const {data} = await axios.post('/api/bookings/check-availability', {location: pickupLocation, pickupDate, returnDate})
     if (data.success) {
       setFilteredCars(data.availableCars)
@@ -47,15 +47,15 @@ const Cars = () => {
       }
       return null
     }
-  }
+  },[axios, pickupLocation, pickupDate, returnDate])
 
   useEffect(()=>{
     isSearchData && searchCarAvailablity()
-  },[])
+  },[isSearchData, searchCarAvailablity])
 
   useEffect(()=>{
     cars.length > 0 && !isSearchData && applyFilter()
-  },[input, cars])
+  },[applyFilter, isSearchData, cars.length])
 
   return (
     <div>
